@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Free IT tutorials ">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="GS COMPUTER, IT ,HTML, CSS, JavaScript">
+    <meta name="author" content="GOBIDHO SARKER">
+    <title>GS computer</title>
+</head>
+<style>
+*{margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  background: #f2f2f2;
+}
+.header {
+  background: #222;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-image: linear-gradient(to right, red , rgb(226, 226, 156));
+}
+.logo img {
+  height: 150px;
+  width: 150px;
+  border-radius:50%;
+}
+.navber ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.navber ul li {
+  position: relative;
+}
+.navber ul li a {
+  display: block;
+  padding: 10px 15px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s ease;
+  background: transparent;
+  border-radius: 6px;
+}
+.navber ul li a:hover {
+  background: #00b894;
+  color: #fff;
+}
+.navber ul li ul {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background: #333;
+  display: none;
+  flex-direction: column;
+  min-width: 180px;
+  border-radius: 6px;
+  z-index: 999;
+}
+.navber ul li:hover ul {
+  display: flex;
+}
+.navber ul li ul li a {
+  padding: 10px 15px;
+  white-space: nowrap;
+}
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+}
+/* Responsive */
+@media (max-width: 768px) {
+  .navber {
+    width: 100%;
+  }
+
+  .navber ul {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: #222;
+    margin-top: 10px;
+    padding: 10px 0;
+  }
+
+  .navber ul.show {
+    display: flex;
+  }
+
+  .navber ul li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .navber ul li ul {
+    position: static;
+    background: #444;
+    margin-top: 5px;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+/* Base Styles */
+.passport-section {
+  padding: 20px;
+  background: #f9f9f9;
+  font-family: Arial, sans-serif;
+  color: #333;
+  line-height: 1.6;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.passport-section h2 {
+  color: #007b5e;
+  margin-bottom: 10px;
+}
+
+.passport-section ul {
+  padding-left: 20px;
+}
+
+.passport-section ul li {
+  margin-bottom: 5px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .passport-section {
+    padding: 15px;
+  }
+
+  .passport-section h2 {
+    font-size: 22px;
+  }
+
+  .passport-section p, 
+  .passport-section ul li {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .passport-section {
+    padding: 10px;
+  }
+
+  .passport-section h2 {
+    font-size: 20px;
+  }
+
+  .passport-section p, 
+  .passport-section ul li {
+    font-size: 14px;
+  }
+}
+/* Visa Section Base Style */
+.visa-section {
+  padding: 20px;
+  background: #eef6ff;
+  font-family: Arial, sans-serif;
+  color: #222;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: 20px auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  line-height: 1.6;
+}
+
+/* Heading Style */
+.visa-section h2 {
+  color: #00509e;
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+/* Paragraph and List */
+.visa-section p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.visa-section ul {
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+
+.visa-section ul li {
+  margin-bottom: 6px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .visa-section {
+    padding: 15px;
+  }
+
+  .visa-section h2 {
+    font-size: 22px;
+  }
+
+  .visa-section p,
+  .visa-section ul li {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .visa-section {
+    padding: 10px;
+  }
+
+  .visa-section h2 {
+    font-size: 20px;
+  }
+
+  .visa-section p,
+  .visa-section ul li {
+    font-size: 14px;
+  }
+}
+/* Designing Section Styles */
+.design-section {
+  padding: 20px;
+  background-color: #f0fff4;
+  color: #222;
+  font-family: Arial, sans-serif;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: 20px auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  line-height: 1.6;
+}
+
+/* Heading */
+.design-section h2 {
+  color: #007f5f;
+  font-size: 26px;
+  margin-bottom: 12px;
+}
+
+/* Paragraph and List */
+.design-section p {
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.design-section ul {
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.design-section ul li {
+  margin-bottom: 6px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .design-section {
+    padding: 15px;
+  }
+
+  .design-section h2 {
+    font-size: 22px;
+  }
+
+  .design-section p,
+  .design-section ul li {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .design-section {
+    padding: 10px;
+  }
+
+  .design-section h2 {
+    font-size: 20px;
+  }
+
+  .design-section p,
+  .design-section ul li {
+    font-size: 14px;
+  }
+}
+/* Job Application Section */
+.job-section {
+  padding: 20px;
+  background-color: #fff7e6;
+  font-family: Arial, sans-serif;
+  color: #222;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: 20px auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  line-height: 1.6;
+}
+
+/* Heading Style */
+.job-section h2 {
+  color: #cc7000;
+  font-size: 26px;
+  margin-bottom: 12px;
+}
+
+/* Paragraphs and List */
+.job-section p {
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.job-section ul {
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.job-section ul li {
+  margin-bottom: 6px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .job-section {
+    padding: 15px;
+  }
+
+  .job-section h2 {
+    font-size: 22px;
+  }
+
+  .job-section p,
+  .job-section ul li {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .job-section {
+    padding: 10px;
+  }
+
+  .job-section h2 {
+    font-size: 20px;
+  }
+
+  .job-section p,
+  .job-section ul li {
+    font-size: 14px;
+  }
+}
+
+
+.footer {
+  background: #222;
+  color: #fff;
+  padding: 40px 20px 20px;
+  font-family: sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer h3 {
+  margin-bottom: 15px;
+  color: #ffcc00;
+}
+
+.footer p,
+.footer a {
+  color: #ccc;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: #fff;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 8px;
+}
+
+.footer-social a img {
+  width: 24px;
+  margin-right: 10px;
+  filter: brightness(0) invert(1);
+  transition: 0.3s;
+}
+
+.footer-social a img:hover {
+  filter: brightness(1);
+}
+
+.footer-bottom {
+  border-top: 1px solid #444;
+  margin-top: 20px;
+  padding-top: 15px;
+  text-align: center;
+  position: relative;
+}
+
+.scroll-top {
+  position: absolute;
+  right: 20px;
+  top: -35px;
+  background: #ffcc00;
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 16px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-social {
+    margin-top: 10px;
+  }
+
+  .scroll-top {
+    right: 10px;
+    top: -30px;
+  }
+}
+
+</style>
+<body>
+<header class="header">
+<div class="logo "><img src="images/gobidho.jpg"> </div>
+<nav class="navber">
+<ul >
+<li><a href="#">HOME</a></li>
+<li><a href="#">OUR SERVICE</a>
+<ul>
+ <li><a href="#passport-info">Passport</a></li>
+  <li><a href="#indian-visa-info">Indian Visa</a></li>
+  <li><a href="#designing-info">Designing</a></li>
+  <li><a href="#job-application-info">Job Application</a></li>
+</ul>
+</li>
+<li><a href="registration.html">REGISTRATION</a></li>
+<li><a href="about.html">ABOUT MY</a></li>
+<li><a href="https://techzoom.tv/">IT NEWS</a></li>
+</ul>
+</nav>
+</header> 
+<section id="passport-info" class="passport-section">
+  <h2>Passport Service</h2>
+  <p>We provide full assistance for applying for a new passport or renewing an existing one. Our services include:</p>
+  <ul class="service-list">
+    <li>Online passport application support</li>
+    <li>Document verification and submission guidance</li>
+    <li>Appointment booking at the passport office</li>
+    <li>Tracking application status</li>
+    <li>Correction or update of passport details</li>
+  </ul>
+  <p><strong>Required Documents:</strong></p>
+  <ul class="document-list">
+    <li>National ID Card (NID)</li>
+    <li>Birth Certificate</li>
+    <li>Photographs (white background)</li>
+    <li>Utility bill (for address proof)</li>
+  </ul>
+  <p>We ensure a smooth and hassle-free passport processing experience.</p>
+</section>
+<section id="indian-visa-info" class="visa-section">
+  <h2>Indian Visa Service</h2>
+  <p>We provide full support for applying for all types of Indian visas, including tourist, medical, business, and student visas. Our services include:</p>
+  <ul class="service-list">
+    <li>Online visa application filling</li>
+    <li>Document checklist and submission guidance</li>
+    <li>Passport-size photo assistance</li>
+    <li>Visa appointment booking support</li>
+    <li>Status tracking and delivery follow-up</li>
+  </ul>
+  <p><strong>Documents Required:</strong></p>
+  <ul class="document-list">
+    <li>Valid Passport (minimum 6 months validity)</li>
+    <li>National ID or Birth Certificate</li>
+    <li>Recent passport-size photographs</li>
+    <li>Utility bill (for address proof)</li>
+    <li>Medical documents (for medical visa)</li>
+  </ul>
+  <p>We make your visa processing fast, accurate, and stress-free.</p>
+</section>
+<section id="designing-info" class="design-section">
+  <h2>Designing Service</h2>
+  <p>We offer creative and professional designing services for individuals, businesses, and brands. Our goal is to bring your ideas to life with modern, responsive, and visually appealing designs.</p>
+  
+  <p><strong>Our Designing Services Include:</strong></p>
+  <ul class="design-list">
+    <li>Logo Design</li>
+    <li>Website UI/UX Design</li>
+    <li>Business Card and Flyer Design</li>
+    <li>Banner & Poster Design</li>
+    <li>Social Media Post Design</li>
+    <li>Resume & CV Design</li>
+  </ul>
+
+  <p>We use tools like Adobe Photoshop, Illustrator, Figma, and Canva to create high-quality designs based on your needs.</p>
+</section>
+<section id="job-application-info" class="job-section">
+  <h2>Job Application Service</h2>
+  <p>We help job seekers prepare and submit professional job applications to increase their chances of success. Our expert guidance ensures your application stands out.</p>
+
+  <p><strong>Our Job Application Services Include:</strong></p>
+  <ul class="job-list">
+    <li>CV/Resume Writing & Design</li>
+    <li>Cover Letter Preparation</li>
+    <li>Email Writing for Job Applications</li>
+    <li>Online Form Filling (BD Jobs, Chakri.com, etc.)</li>
+    <li>LinkedIn Profile Setup</li>
+    <li>Job Interview Tips and Guidance</li>
+  </ul>
+
+  <p>We ensure error-free, attractive, and personalized job applications tailored to the job and company you're applying for.</p>
+</section>
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-about">
+      <h3>About Us</h3>
+      <p>We provide digital services like Passport, Visa, Designing, and Job Application support with professionalism and dedication.</p>
+    </div>
+
+    <div class="footer-links">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#passport-info">Passport</a></li>
+        <li><a href="#indian-visa-info">Visa</a></li>
+        <li><a href="#designing-info">Designing</a></li>
+        <li><a href="#job-application-info">Job Application</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-contact">
+      <h3>Contact</h3>
+      <p>Phone: 01316903037</p>
+      <p>Email:gssuvo@gmail.com</p>
+      
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 GOBIDHO SARKER. All rights reserved.</p>
+    <button onclick="scrollToTop()" class="scroll-top">↑</button>
+  </div>
+</footer>
+
+
+
+</body>
+</html>

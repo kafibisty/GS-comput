@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <title>Customer Form with Edit/Delete & Search</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #eef2f3;
+      padding: 20px;
+    }
+    form, table {
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      max-width: 700px;
+      margin: 20px auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button {
+      background: green;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: darkgreen;
+    }
+    h2 {
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+      vertical-align: middle;
+    }
+    th {
+      background: #f0f0f0;
+    }
+    .message {
+      text-align: center;
+      color: green;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .btn-edit, .btn-delete {
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+      margin: 0 3px;
+    }
+    .btn-edit {
+      background: #007bff;
+    }
+    .btn-edit:hover {
+      background: #0056b3;
+    }
+    .btn-delete {
+      background: #dc3545;
+    }
+    .btn-delete:hover {
+      background: #a71d2a;
+    }
+    #searchInput {
+      max-width: 700px;
+      margin: 10px auto 0;
+      display: block;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="customerForm">
+    <h2>কাস্টমার ফর্ম</h2>
+    <input type="text" name="name" placeholder="নাম লিখুন" required />
+    <input type="text" name="mobile" placeholder="মোবাইল নম্বর লিখুন" required />
+    <textarea name="message" placeholder="আপনার মেসেজ লিখুন" rows="3" required></textarea>
+    <button type="submit">সাবমিট করুন</button>
+    <div class="message" id="responseMsg"></div>
+  </form>
+
+  <input type="text" id="searchInput" placeholder="এখানে সার্চ করুন (নাম, মোবাইল, মেসেজ)" />
+
+  <div id="customerDataSection">
+    <h2>📋 সকল পার্টির ডেটা</h2>
+    <table id="customerTable">
+      <thead>
+        <tr>
+          <th>ক্রমিক</th>
+          <th>নাম</th>
+          <th>মোবাইল</th>
+          <th>মেসেজ</th>
+          <th>অ্যাকশন</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    const form = document.getElementById("customerForm");
+    const responseMsg = document.getElementById("responseMsg");
+    const tableBody = document.querySelector("#customerTable tbody");
+    const searchInput = document.getElementById("searchInput");
+
+    let customers = JSON.parse(localStorage.getItem("customers")) || [];
+    let editIndex = -1; // -1 means no edit mode
+
+    // Load and display all customers
+    function renderTable(filter = "") {
+      tableBody.innerHTML = "";
+
+      const filteredCustomers = customers.filter(cust => {
+        const combined = (cust.name + " " + cust.mobile + " " + cust.message).toLowerCase();
+        return combined.includes(filter.toLowerCase());
+      });
+
+      filteredCustomers.forEach((customer, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${customer.name}</td>
+          <td>${customer.mobile}</td>
+          <td>${customer.message}</td>
+          <td>
+            <button class="btn-edit" data-index="${index}">Edit</button>
+            <button class="btn-delete" data-index="${index}">Delete</button>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+
+      if (filteredCustomers.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="5">কোন ডেটা পাওয়া যায়নি।</td></tr>`;
+      }
+    }
+
+    // Save customers to localStorage
+    function saveCustomers() {
+      localStorage.setItem("customers", JSON.stringify(customers));
+    }
+
+    // Reset form and edit state
+    function resetForm() {
+      form.reset();
+      editIndex = -1;
+      form.querySelector("button").textContent = "সাবমিট করুন";
+    }
+
+    // Submit form handler
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+
+      const name = form.name.value.trim();
+      const mobile = form.mobile.value.trim();
+      const message = form.message.value.trim();
+
+      if (!name || !mobile || !message) {
+        responseMsg.textContent = "⚠️ সকল ঘর পূরণ করুন।";
+        responseMsg.style.color = "red";
+        return;
+      }
+
+      if (editIndex === -1) {
+        // New entry
+        customers.push({ name, mobile, message });
+        responseMsg.textContent = "✅ ডেটা সফলভাবে সংরক্ষিত হয়েছে!";
+        responseMsg.style.color = "green";
+      } else {
+        // Update existing
+        customers[editIndex] = { name, mobile, message };
+        responseMsg.textContent = "✅ ডেটা সফলভাবে আপডেট হয়েছে!";
+        responseMsg.style.color = "green";
+      }
+
+      saveCustomers();
+      renderTable(searchInput.value);
+      resetForm();
+    });
+
+    // Handle Edit/Delete buttons
+    tableBody.addEventListener("click", e => {
+      if (e.target.classList.contains("btn-edit")) {
+        // Edit
+        const idx = parseInt(e.target.dataset.index);
+        const cust = customers[idx];
+        form.name.value = cust.name;
+        form.mobile.value = cust.mobile;
+        form.message.value = cust.message;
+        editIndex = idx;
+        form.querySelector("button").textContent = "আপডেট করুন";
+        responseMsg.textContent = "";
+      } else if (e.target.classList.contains("btn-delete")) {
+        // Delete
+        const idx = parseInt(e.target.dataset.index);
+        if (confirm("আপনি কি নিশ্চিতভাবে এই ডেটা মুছে ফেলতে চান?")) {
+          customers.splice(idx, 1);
+          saveCustomers();
+          renderTable(searchInput.value);
+          responseMsg.textContent = "✅ ডেটা মুছে ফেলা হয়েছে।";
+          responseMsg.style.color = "green";
+          resetForm();
+        }
+      }
+    });
+
+    // Search filter input
+    searchInput.addEventListener("input", () => {
+      renderTable(searchInput.value);
+    });
+
+    // Initial load
+    renderTable();
+  </script>
+
+</body>
+</html>
